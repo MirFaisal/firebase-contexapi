@@ -80,6 +80,7 @@ const SingIn = () => {
 
   return (
     <>
+      <Tost />
       <div className="flex h-screen items-center">
         <div className="container">
           <section className="relative w-full flex flex-wrap lg:h-[80vh] lg:items-center">
@@ -170,7 +171,7 @@ const SingIn = () => {
                       <input
                         onChange={() => handelPasswordOnChange(event)}
                         type="password"
-                        autocomplete="current-password"
+                        autoComplete="current-password"
                         id="singin_password"
                         className="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm"
                         placeholder="Enter password"
@@ -234,7 +235,6 @@ const SingIn = () => {
           </section>
         </div>
       </div>
-      <Tost />
     </>
   );
 };

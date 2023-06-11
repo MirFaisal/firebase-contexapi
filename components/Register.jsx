@@ -90,6 +90,7 @@ const Register = () => {
   };
   return (
     <>
+      <Tost />
       <div className=" h-screen flex items-center">
         <section className="bg-white container mx-auto h-[80vh]">
           <div className="lg:grid lg:min-h-full lg:grid-cols-12">
@@ -328,7 +329,6 @@ const Register = () => {
           </div>
         </section>
       </div>
-      <Tost />
     </>
   );
 };

@@ -3,7 +3,6 @@ export const showTost = (tost_message) => {
   const modal = document.getElementById("modal");
   modal.classList.remove("top-[-110%]");
   modal.classList.add("top-[30px]");
-  console.log("tost show");
   const interval = setInterval(() => {
     modal.classList.remove("top-[30px]");
     modal.classList.add("top-[-110%]");

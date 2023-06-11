@@ -234,7 +234,7 @@ const SingIn = () => {
           </section>
         </div>
       </div>
-      <Tost></Tost>
+      <Tost />
     </>
   );
 };

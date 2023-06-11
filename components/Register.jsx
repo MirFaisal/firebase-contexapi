@@ -1,7 +1,12 @@
 "use client";
 import { authContext } from "@context/UserCredential";
+import { showTost } from "@utils/tost";
+import Image from "next/image";
 import Link from "next/link";
 import { useContext, useState } from "react";
+import github_logo from "../public/github.svg";
+import google_logo from "../public/google.svg";
+import Tost from "./Tost";
 
 const Register = () => {
   // email and password state
@@ -15,7 +20,7 @@ const Register = () => {
     createUserWithGoogleAuthProvider,
     createUserWithGithubAuthProvider,
   } = useContext(authContext);
-  
+
   //handel first name
   const handelFirstName = (e) => {
     setUserName(e.target.value);
@@ -54,6 +59,7 @@ const Register = () => {
           const user = userCredential.user;
           console.log(user);
           form.reset();
+          showTost("Account create completed");
         })
         .catch((error) => console.log(error));
     } else {
@@ -67,6 +73,7 @@ const Register = () => {
       .then((userCredential) => {
         const user = userCredential.user;
         console.log(user);
+        showTost("Account create completed");
       })
       .catch((error) => console.log(error));
   };
@@ -77,6 +84,7 @@ const Register = () => {
       .then((userCredential) => {
         const user = userCredential.user;
         console.log(user);
+        showTost("Account create completed");
       })
       .catch((error) => console.log(error));
   };
@@ -218,6 +226,7 @@ const Register = () => {
                     <input
                       onChange={() => handelPasswordOnChange(event)}
                       type="password"
+                      autocomplete="current-password"
                       id="Password"
                       name="password"
                       className="mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm"
@@ -235,6 +244,7 @@ const Register = () => {
                     <input
                       onChange={() => handelConfirmPasswordOnChange(event)}
                       type="password"
+                      autocomplete="new-password"
                       id="PasswordConfirmation"
                       name="password_confirmation"
                       className="mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm"
@@ -285,11 +295,40 @@ const Register = () => {
                     </p>
                   </div>
                 </form>
+                <div className="divider">OR</div>
+                <div className="mt-8 flex justify-between md:max-w-sm md:mx-auto space-x-1">
+                  <button
+                    className="btn md:w-[150px] xl:w-[200px] capitalize"
+                    onClick={() => handelGoogleAuthProvider()}
+                  >
+                    <Image
+                      src={google_logo}
+                      weidth={24}
+                      height={24}
+                      alt="google logo"
+                    />
+                    Google
+                  </button>
+
+                  <button
+                    className="btn md:w-[150px] xl:w-[200px] capitalize"
+                    onClick={() => handelGithubAuthProvider()}
+                  >
+                    <Image
+                      src={github_logo}
+                      weidth={24}
+                      height={24}
+                      alt="google logo"
+                    />
+                    GitHub
+                  </button>
+                </div>
               </div>
             </main>
           </div>
         </section>
       </div>
+      <Tost />
     </>
   );
 };

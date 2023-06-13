@@ -5,16 +5,18 @@ import {
   GoogleAuthProvider,
   createUserWithEmailAndPassword,
   getAuth,
+  onAuthStateChanged,
   sendEmailVerification,
   sendPasswordResetEmail,
   signInWithEmailAndPassword,
   signInWithPopup,
   updateProfile,
 } from "firebase/auth";
-import { createContext } from "react";
-
+import { createContext, useEffect, useState } from "react";
 export const authContext = createContext();
+
 const UserCredential = ({ children }) => {
+  const [user, setUser] = useState();
   // firebase auth
   const auth = getAuth(firebase_App);
   //singin with email and password
@@ -43,10 +45,19 @@ const UserCredential = ({ children }) => {
   const updateUserProfile = (userInfo) =>
     updateProfile(auth.currentUser, userInfo);
 
+  useEffect(() => {
+    const subscribe = onAuthStateChanged(auth, (currentUser) =>
+      setUser(currentUser)
+    );
+    return () => {
+      subscribe();
+    };
+  }, []);
   return (
     <>
       <authContext.Provider
         value={{
+          user,
           sinInWithEmail,
           createUserwithEmail,
           createUserWithGoogleAuthProvider,

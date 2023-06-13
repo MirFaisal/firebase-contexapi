@@ -1,6 +1,12 @@
+"use client";
+import { authContext } from "@context/UserCredential";
+import Image from "next/image";
 import Link from "next/link";
+import { useContext } from "react";
 
 const Navbar = () => {
+  const { user } = useContext(authContext);
+  const userPhoto = user?.photoURL;
   return (
     <>
       <nav className="bg-white dark:bg-slate-900 fixed top-0 w-screen z-50">
@@ -113,6 +119,43 @@ const Navbar = () => {
                   />
                 </svg>
               </button>
+              {/*  */}
+              {user ? (
+                <div className="dropdown dropdown-end">
+                  <label
+                    tabIndex={0}
+                    className="btn btn-ghost btn-circle avatar"
+                  >
+                    <div className="w-10 rounded-full">
+                      <Image
+                        referrerPolicy="no-referrer"
+                        src={userPhoto}
+                        loader={() => userPhoto}
+                        width={24}
+                        height={24}
+                        alt="profile"
+                      ></Image>
+                    </div>
+                  </label>
+                  <ul
+                    tabIndex={0}
+                    className="mt-3 p-2 shadow menu menu-sm dropdown-content bg-base-100 rounded-box w-52"
+                  >
+                    <li>
+                      <a className="justify-between">
+                        Profile
+                        <span className="badge">New</span>
+                      </a>
+                    </li>
+                    <li>
+                      <a>Settings</a>
+                    </li>
+                    <li>
+                      <a>Logout</a>
+                    </li>
+                  </ul>
+                </div>
+              ) : null}
             </div>
           </div>
         </div>

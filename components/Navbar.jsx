@@ -5,8 +5,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { useContext } from "react";
 
-const { user, logoutFromAccount } = useContext(authContext);
 const Navbar = () => {
+  const { user, logoutFromAccount } = useContext(authContext);
   // handel logout
   const handelLogout = () => {
     logoutFromAccount().then(() => {

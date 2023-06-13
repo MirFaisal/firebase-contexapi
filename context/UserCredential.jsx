@@ -49,6 +49,7 @@ const UserCredential = ({ children }) => {
   const updateUserProfile = (userInfo) =>
     updateProfile(auth.currentUser, userInfo);
 
+  // to hold user state and update user sate
   useEffect(() => {
     const subscribe = onAuthStateChanged(auth, (currentUser) =>
       setUser(currentUser)

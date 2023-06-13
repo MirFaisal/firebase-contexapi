@@ -12,7 +12,7 @@ const Navbar = () => {
   // handel logout
   const handelLogout = () => {
     logoutFromAccount().then(() => {
-      showTost("Logout!");
+      showTost("Logout !");
     });
   };
   return (

@@ -1,12 +1,20 @@
 "use client";
 import { authContext } from "@context/UserCredential";
+import { showTost } from "@utils/tost";
 import Image from "next/image";
 import Link from "next/link";
 import { useContext } from "react";
 
 const Navbar = () => {
-  const { user } = useContext(authContext);
+  const { user, logoutFromAccount } = useContext(authContext);
   const userPhoto = user?.photoURL;
+
+  // handel logout
+  const handelLogout = () => {
+    logoutFromAccount().then(() => {
+      showTost("Logout !");
+    });
+  };
   return (
     <>
       <nav className="bg-white dark:bg-slate-900 fixed top-0 w-screen z-50">
@@ -86,41 +94,26 @@ const Navbar = () => {
             </nav>
 
             <div className="flex items-center gap-4">
-              <div className="sm:flex sm:gap-4">
-                <Link
-                  className="block rounded-md bg-blue-500 px-5 py-2.5 text-sm font-medium text-white transition hover:bg-blue-700"
-                  href="/singin"
-                >
-                  Login
-                </Link>
+              {!user?.displayName ? (
+                <div className="sm:flex sm:gap-4">
+                  <Link
+                    className="block rounded-md bg-blue-500 px-5 py-2.5 text-sm font-medium text-white transition hover:bg-blue-700"
+                    href="/singin"
+                  >
+                    Login
+                  </Link>
 
-                <Link
-                  className="hidden rounded-md bg-gray-100 px-5 py-2.5 text-sm font-medium text-blue-500 transition hover:text-blue-700 sm:block"
-                  href="/register"
-                >
-                  Register
-                </Link>
-              </div>
+                  <Link
+                    className="hidden rounded-md bg-gray-100 px-5 py-2.5 text-sm font-medium text-blue-500 transition hover:text-blue-700 sm:block"
+                    href="/register"
+                  >
+                    Register
+                  </Link>
+                </div>
+              ) : null}
 
-              <button className="block rounded bg-gray-100 p-2.5 text-gray-600 transition hover:text-gray-600/75 md:hidden">
-                <span className="sr-only">Toggle menu</span>
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="h-5 w-5"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M4 6h16M4 12h16M4 18h16"
-                  />
-                </svg>
-              </button>
               {/*  */}
-              {user ? (
+              {user?.displayName ? (
                 <div className="dropdown dropdown-end">
                   <label
                     tabIndex={0}
@@ -151,7 +144,7 @@ const Navbar = () => {
                       <a>Settings</a>
                     </li>
                     <li>
-                      <a>Logout</a>
+                      <p onClick={() => handelLogout()}>Logout</p>
                     </li>
                   </ul>
                 </div>

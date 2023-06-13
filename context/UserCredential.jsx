@@ -10,6 +10,7 @@ import {
   sendPasswordResetEmail,
   signInWithEmailAndPassword,
   signInWithPopup,
+  signOut,
   updateProfile,
 } from "firebase/auth";
 import { createContext, useEffect, useState } from "react";
@@ -25,6 +26,9 @@ const UserCredential = ({ children }) => {
   // firebase auth provider with email and password
   const createUserwithEmail = (email, password) =>
     createUserWithEmailAndPassword(auth, email, password);
+
+  // logout current account
+  const logoutFromAccount = () => signOut(auth);
   //create user with google auth provider
   const googleProvider = new GoogleAuthProvider();
   const createUserWithGoogleAuthProvider = () =>
@@ -65,6 +69,7 @@ const UserCredential = ({ children }) => {
           emailVerification,
           passwordReste,
           updateUserProfile,
+          logoutFromAccount,
         }}
       >
         {children}

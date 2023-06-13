@@ -10,7 +10,8 @@ import Tost from "./Tost";
 
 const Register = () => {
   // email and password state
-  const [userName, setUserName] = useState();
+  const [userFirstName, setUserFirstName] = useState();
+  const [userLastName, setUserLastName] = useState();
   const [userEmail, setUserEmail] = useState();
   const [userPassword, setUserPassword] = useState();
   const [userConfirmPassword, setUserConfirmPassword] = useState();
@@ -19,16 +20,20 @@ const Register = () => {
     createUserwithEmail,
     createUserWithGoogleAuthProvider,
     createUserWithGithubAuthProvider,
+    emailVerification,
+    updateUserProfile,
   } = useContext(authContext);
 
   //handel first name
   const handelFirstName = (e) => {
-    setUserName(e.target.value);
+    setUserFirstName(e.target.value);
+    console.log(e.target.value);
   };
 
   //handel last name
   const handelLastName = (e) => {
-    setUserName(userName + " " + e.target.value);
+    setUserLastName(e.target.value);
+    console.log(e.target.value);
   };
 
   //handel email on Blur
@@ -57,6 +62,10 @@ const Register = () => {
       createUserwithEmail(userEmail, userPassword)
         .then((userCredential) => {
           const user = userCredential.user;
+          updateUserProfile({
+            displayName: userFirstName + " " + userLastName,
+          });
+          emailVerification().then(() => showTost("Please check your Email"));
           console.log(user);
           form.reset();
           showTost("Account create completed");
@@ -74,6 +83,7 @@ const Register = () => {
         const user = userCredential.user;
         console.log(user);
         showTost("Account create completed");
+        emailVerification().then(() => showTost("handel with care"));
       })
       .catch((error) => console.log(error));
   };
@@ -88,6 +98,7 @@ const Register = () => {
       })
       .catch((error) => console.log(error));
   };
+  // update user profile
   return (
     <>
       <Tost />

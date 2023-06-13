@@ -18,6 +18,7 @@ const SingIn = () => {
     sinInWithEmail,
     createUserWithGoogleAuthProvider,
     createUserWithGithubAuthProvider,
+    passwordReste,
   } = useContext(authContext);
 
   //handel email on Blur
@@ -42,7 +43,7 @@ const SingIn = () => {
         const user = userCredential.user;
         console.log(user);
         form.reset();
-        showTost();
+        showTost("login successful");
       })
       .catch((error) => console.log(error));
   };
@@ -53,7 +54,7 @@ const SingIn = () => {
       .then((userCredential) => {
         const user = userCredential.user;
         console.log(user);
-        showTost();
+        showTost("login successful");
       })
       .catch((error) => console.log(error));
   };
@@ -67,6 +68,20 @@ const SingIn = () => {
         showTost("Login Successful");
       })
       .catch((error) => console.log(error));
+  };
+
+  // handel password error
+  const handelPasswordReset = () => {
+    if (userEmail) {
+      passwordReste(userEmail)
+        .then(() => {
+          showTost("Please Cheack your Email");
+        })
+        .catch((error) => console.log(error));
+    } else {
+      showTost("Please enter Your email first!");
+      return;
+    }
   };
 
   const handelPasswordShow = () => {
@@ -207,11 +222,19 @@ const SingIn = () => {
                   </div>
 
                   <div className="flex items-center justify-between">
-                    <p className="text-sm text-gray-500">
-                      No account?
-                      <Link className="underline" href="/register">
-                        Sign up
-                      </Link>
+                    <p className="flex flex-col text-sm text-gray-500">
+                      <span
+                        className="btn btn-link capitalize p-0 text-gray-900"
+                        onClick={() => handelPasswordReset()}
+                      >
+                        Forgot your password
+                      </span>
+                      <span>
+                        No account?
+                        <Link className="underline" href="/register">
+                          Sign up
+                        </Link>
+                      </span>
                     </p>
 
                     <button

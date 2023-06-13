@@ -5,8 +5,11 @@ import {
   GoogleAuthProvider,
   createUserWithEmailAndPassword,
   getAuth,
+  sendEmailVerification,
+  sendPasswordResetEmail,
   signInWithEmailAndPassword,
   signInWithPopup,
+  updateProfile,
 } from "firebase/auth";
 import { createContext } from "react";
 
@@ -29,6 +32,17 @@ const UserCredential = ({ children }) => {
   const githubProvider = new GithubAuthProvider();
   const createUserWithGithubAuthProvider = () =>
     signInWithPopup(auth, githubProvider);
+
+  //send email for verification
+  const emailVerification = () => sendEmailVerification(auth.currentUser);
+
+  // send password reset
+  const passwordReste = (email) => sendPasswordResetEmail(auth, email);
+
+  // update profile
+  const updateUserProfile = (userInfo) =>
+    updateProfile(auth.currentUser, userInfo);
+
   return (
     <>
       <authContext.Provider
@@ -37,6 +51,9 @@ const UserCredential = ({ children }) => {
           createUserwithEmail,
           createUserWithGoogleAuthProvider,
           createUserWithGithubAuthProvider,
+          emailVerification,
+          passwordReste,
+          updateUserProfile,
         }}
       >
         {children}

@@ -5,10 +5,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { useContext } from "react";
 
+const { user, logoutFromAccount } = useContext(authContext);
 const Navbar = () => {
-  const { user, logoutFromAccount } = useContext(authContext);
-  const userPhoto = user?.photoURL;
-
   // handel logout
   const handelLogout = () => {
     logoutFromAccount().then(() => {
@@ -122,8 +120,8 @@ const Navbar = () => {
                     <div className="w-10 rounded-full">
                       <Image
                         referrerPolicy="no-referrer"
-                        src={userPhoto}
-                        loader={() => userPhoto}
+                        src={user?.photoURL}
+                        loader={() => user?.photoURL}
                         width={24}
                         height={24}
                         alt="profile"

@@ -83,7 +83,9 @@ const Register = () => {
         const user = userCredential.user;
         console.log(user);
         showTost("Account create completed");
-        emailVerification().then(() => showTost("handel with care"));
+        emailVerification().then(() =>
+          showTost("Please check your email and verify your acccount")
+        );
       })
       .catch((error) => console.log(error));
   };

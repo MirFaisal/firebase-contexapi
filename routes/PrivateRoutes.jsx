@@ -13,7 +13,7 @@ const PrivateRoutes = ({ children }) => {
   }
 
   if (!user && user?.uid) {
-    return <>{children}</>;
+    return children;
   }
   return router.push("/singin");
 };

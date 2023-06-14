@@ -7,7 +7,7 @@ export default function Home() {
     <>
       <Tost></Tost>
       <PrivateRoutes>
-        <div className="hero min-h-screen  bg-gradient-to-r from-cyan-500 to-blue-500">
+        <div className="hero min-h-screen bg-gradient-to-r from-cyan-500 to-blue-500">
           <div className="hero-overlay bg-opacity-60"></div>
           <div className="hero-content text-center text-neutral-content">
             <div className="max-w-md">

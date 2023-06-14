@@ -12,7 +12,7 @@ const PrivateRoutes = ({ children }) => {
     return <Loading></Loading>;
   }
 
-  if (!user && user?.uid) {
+  if (user && user?.uid) {
     return <>{children}</>;
   }
   return router.push("/singin");

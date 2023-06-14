@@ -5,7 +5,6 @@ import { showTost } from "@utils/tost";
 export default function Home() {
   return (
     <>
-      <Tost></Tost>
       <PrivateRoutes>
         <div className="hero min-h-screen bg-gradient-to-r from-cyan-500 to-blue-500">
           <div className="hero-overlay bg-opacity-60"></div>

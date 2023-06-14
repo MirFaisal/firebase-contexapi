@@ -11,7 +11,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <UserCredential>
-        <body className="dark:bg-gray-900">
+        <body className="relative dark:bg-gray-900 top">
           <header>
             <Navbar />
           </header>

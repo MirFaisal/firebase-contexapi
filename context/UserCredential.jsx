@@ -17,6 +17,7 @@ import { createContext, useEffect, useState } from "react";
 export const authContext = createContext();
 
 const UserCredential = ({ children }) => {
+  const [isLoading, setIsLoading] = useState(true);
   const [user, setUser] = useState();
   // firebase auth
   const auth = getAuth(firebase_App);
@@ -51,9 +52,10 @@ const UserCredential = ({ children }) => {
 
   // to hold user state and update user sate
   useEffect(() => {
-    const subscribe = onAuthStateChanged(auth, (currentUser) =>
-      setUser(currentUser)
-    );
+    const subscribe = onAuthStateChanged(auth, (currentUser) => {
+      setUser(currentUser);
+      setIsLoading(false);
+    });
     return () => {
       subscribe();
     };
@@ -62,6 +64,7 @@ const UserCredential = ({ children }) => {
     <>
       <authContext.Provider
         value={{
+          isLoading,
           user,
           sinInWithEmail,
           createUserwithEmail,

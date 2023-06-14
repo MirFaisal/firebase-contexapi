@@ -3,7 +3,7 @@ const Tost = () => {
     <>
       <div
         id="modal"
-        className="rounded-xl border border-gray-100 bg-white p-4 shadow-xl fixed top-[-110%] left-1/2 -translate-x-1/2 z-50 transition-all duration-700 ease-in-out"
+        className="rounded-xl border border-gray-100 bg-white p-4 shadow-xl fixed left-1/2 -translate-x-1/2 z-50 transition-all duration-700 ease-in-out top-[-100%]"
       >
         <div className="flex items-start gap-4">
           <span className="text-green-600">

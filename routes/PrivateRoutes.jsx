@@ -1,6 +1,6 @@
 "use client";
 import { authContext } from "@context/UserCredential";
-import { useRouter } from "next/navigation";
+import { useRouter } from "next/router";
 import { useContext } from "react";
 // import "../styles/globals.css";
 import Loading from "@components/loading";
@@ -15,7 +15,7 @@ const PrivateRoutes = ({ children }) => {
   }
 
   if (user && user?.uid) {
-    return children;
+    return <>{children}</>;
   }
   return router.push("/singin");
 };
